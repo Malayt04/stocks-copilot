@@ -14,11 +14,16 @@ const copilotKit = new CopilotRuntime();
 const serviceAdapter = new GroqAdapter({ groq, model: "llama3-groq-8b-8192-tool-use-preview" });
 
 export const POST = async (req: NextRequest) => {
-    const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
-        runtime: copilotKit,
-        serviceAdapter,
-        endpoint: "/api/copilotkit",
-    });
+    try {
+        const { handleRequest } = copilotRuntimeNextJSAppRouterEndpoint({
+            runtime: copilotKit,
+            serviceAdapter,
+            endpoint: "/api/copilotkit",
+        });
 
-    return handleRequest(req);
+        return await handleRequest(req);
+    } catch (error) {
+        console.error("Error in POST /api/copilotkit:", error);
+        return new Response("Internal Server Error", { status: 500 });
+    }
 };
