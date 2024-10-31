@@ -2,14 +2,14 @@
 
 import { Header } from "@/components/Header";
 import { MarketTrendsDisplay } from "@/components/MarketTrendDisplay";
-//import { Spinner } from "@/components/Spinner";
 import { StockDetailsCard } from "@/components/StockDetailCard";
-//import { fetchStock } from "@/lib/actions";
 import { useCopilotAction } from "@copilotkit/react-core";
 import { CopilotChat } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
 import axios from "axios";
 
+
+const apiKey = process.env.NEXT_PUBLIC_TWELVE_DATA_API_KEY
 
 export default function Page() {
   useCopilotAction({
@@ -26,7 +26,7 @@ export default function Page() {
 
     handler:  async ({ symbol }) => {
       try {
-        const response = await axios.get(`https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(symbol)}&interval=1min&apikey=cb2e464c89e344aea67dedfa6a30645f&source=docs`);
+        const response = await axios.get(`https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(symbol)}&interval=1min&apikey=${apiKey}&source=docs`);
         return response.data
     } catch (error) {
         console.log(error);
