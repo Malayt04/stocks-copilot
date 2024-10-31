@@ -32,10 +32,10 @@ export function MarketTrendsDisplay({marketData}:{marketData: StockData[]}) { //
         >
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={marketData}>
-              <XAxis dataKey="datetime" /> {/* Ensure the dataKey matches the property name */}
+              <XAxis dataKey="datetime" /> 
               <YAxis dataKey={"close"}/>
               <ChartTooltip content={<ChartTooltipContent />} />
-              <Line type="monotone" dataKey="close" stroke="var(--color-stocks)" strokeWidth={2} /> {/* Ensure the dataKey matches the property name */}
+              <Line type="monotone" dataKey="close" stroke="var(--color-stocks)" strokeWidth={2} /> 
             </LineChart>
           </ResponsiveContainer>
         </ChartContainer>
